@@ -32,7 +32,9 @@
 import { useState } from "react";
 import { ethers } from "ethers";
 
+
 const ConnectWallet = () => {
+   console.log(ethers);
 
    const [error, setError] = useState(null);
    const [account, setAccount] = useState(null);
@@ -46,7 +48,7 @@ const ConnectWallet = () => {
               accountChanged([result[0]]);
             });
         } else {
-          setError("You nave not MetaMask");
+          setError("You nave not MetaMask. Please install it");
         }
    }
 
@@ -68,18 +70,16 @@ const ConnectWallet = () => {
 
    const sendTransaction = async (e) => {
       e.preventDefault();
-      let amount = e.target.amount.value;
-      const amountForTransfer = Number(amount).toString(16);
-      const toAdress = e.target.to_adress.value;
-      console.log(toAdress)
+      let res = String(e.target.amount.value);
+      let amount = ethers.parseEther(res)
 
       let params = [
         {
           from: "0x4ab7070368c17F6A55F6b9e847850cAD345D8Edc",
-          to: "toAdress",
+          to: "0x0890412e7dF4FC959F13e5A8D33EaEaf830d91d4",
           gas: Number(21000).toString(16),
           gasPrice: Number(25000).toString(16),
-          value: amountForTransfer,
+          value:amount.toString(16)
         },
       ];
 
@@ -90,7 +90,10 @@ const ConnectWallet = () => {
       }).catch(error => console.log(error));
    }
 
- 
+   // const sendTransaction = async () => {
+      
+   // }
+
 
   return (
     <>
@@ -101,7 +104,7 @@ const ConnectWallet = () => {
         <form onSubmit={sendTransaction}>
            <label>Enter transaction adress:</label>
            <input type="text" placeholder="Recipient adress" name="to_adress" />
-           <input type="text" placeholder="Amount in ETH" name="amount"/>
+           <input placeholder="Amount in ETH" name="amount"/>
            <input type="submit" value="submit"/>
       </form>
     </>
