@@ -1,11 +1,12 @@
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Button, Web3Modal } from '@web3modal/react'
 import { configureChains, createConfig, WagmiConfig } from 'wagmi'
-import { arbitrum, mainnet, polygon } from 'wagmi/chains'
+import { arbitrum, mainnet, sepolia } from 'wagmi/chains'
+// import WebButton from '../WebButton/WebButton'
 
 
-const chains = [arbitrum, mainnet, polygon]
-const projectId = 'YOUR_PROJECT_ID'
+const chains = [arbitrum, mainnet, sepolia]
+const projectId = import.meta.env.VITE_APP_PROJECT_KEY;
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 const wagmiConfig = createConfig({
@@ -19,9 +20,10 @@ const ConnectWallet = () => {
   return (
     <>
       <WagmiConfig config={wagmiConfig}>
-        <Web3Button />
+           <Web3Button balance='show'/>
+           {/* <WebButton/> */}
       </WagmiConfig>
-      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+      <Web3Modal projectId={projectId} ethereumClient={ethereumClient}/>
     </>
   )
 }
