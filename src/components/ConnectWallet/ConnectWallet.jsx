@@ -4,6 +4,7 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi'
 import { arbitrum, mainnet, sepolia } from 'wagmi/chains'
 import { ethers } from "ethers";
 import { useState } from "react";
+import { useWeb3Modal } from '@web3modal/react';
 
 const chains = [arbitrum, mainnet, sepolia]
 const projectId = import.meta.env.VITE_APP_PROJECT_KEY;
@@ -11,26 +12,30 @@ const projectId = import.meta.env.VITE_APP_PROJECT_KEY;
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 const wagmiConfig = createConfig({
-  autoConnect: true,
+  autoConnect: false,
   connectors: w3mConnectors({ projectId, chains }),
   publicClient
 })
 
 const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
+
+
 const ConnectWallet = () => {
-  const [userBalance, setUserBalance] = useState();
+  const { open, close } = useWeb3Modal();
+
+  const [userBalance, setUserBalance] = useState('');
   const [error, setError] = useState(null);
   const [account, setAccount] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const connect = () => {
+  const connect = async () => {
     if (window.ethereum) {
-          window.ethereum
+         await window.ethereum
             .request({ method: "eth_requestAccounts" })
             .then((result) => {
-              accountChanged([result[0]]);
-              
-            });
+              accountChanged([result[0]]);             
+            }).then(setIsOpen(true))
         } else {
           setError("You nave not MetaMask. Please install it");
         }
@@ -41,8 +46,8 @@ const ConnectWallet = () => {
       getBalance(accountName)
    }
   
-  const getBalance = (accountAdress) => {
-      window.ethereum
+  const getBalance = async (accountAdress) => {
+      await window.ethereum
         .request({
           method: "eth_getBalance",
           params: [String(accountAdress), "latest"],
@@ -83,26 +88,20 @@ const ConnectWallet = () => {
   return (
     <>
       <WagmiConfig config={wagmiConfig}>
-        <Web3Button onClick={connect()} />
-        {/* <WebButton/> */}
-        <h3>Balance:{customBalance}</h3>
-        
+        <Web3Button onClick={() => connect()} />
+        <h3>Balance: {
+          isOpen && <span> {customBalance} </span>}
+        </h3>
       </WagmiConfig>
-      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} /> 
-
-            {/* <button onClick={connect}> Connect Wallet</button>
-      <h3>Adress:{account}</h3>
-      <h3>Balance:{userBalance}</h3> */}
-
-     
-       <form onSubmit={sendTransaction}>
-           <label>Enter transaction adress:</label>
-           <input type="text" placeholder="Recipient adress" name="to_adress" />
-           <input placeholder="Amount in ETH" name="amount"/>
-           <input type="submit" value="submit"/>
+      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+      <form onSubmit={sendTransaction}>
+        <label>Enter transaction adress:</label>
+        <input type="text" placeholder="Recipient adress" name="to_adress" />
+        <input placeholder="Amount in ETH" name="amount" />
+        <input type="submit" value="submit" />
       </form>
     </>
-  )
+  );
 }
 
 export default ConnectWallet;
