@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Formik, Form, Field } from "formik";
 import { ethers } from "ethers";
 
-const FormWallet = ({ account }) => {
+const Transaction = ({ account }) => {
   const initialValues = {
     address: "",
     amount: "",
@@ -50,8 +50,8 @@ const FormWallet = ({ account }) => {
   );
 };
 
-FormWallet.propTypes = {
+Transaction.propTypes = {
   account: PropTypes.array,
 };
 
-export default FormWallet;
+export default Transaction;

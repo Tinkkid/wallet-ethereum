@@ -1,9 +1,9 @@
-import './App.css'
-import FormWallet from './components/FormWallet/FormWallet'
-import NavBar from './components/NavBar/NavBar'
+
 import { ethers } from "ethers";
 
 import { useState } from "react";
+import ConnectWallet from './components/ConnectWallet/ConnectWallet';
+import Transaction from "./components/Transaction/Transaction";
 
 
 function App() {
@@ -44,8 +44,8 @@ function App() {
 
   return (
     <>
-      <NavBar connect={() => connect()} isOpen={isOpen} customBalance={customBalance} />
-      <FormWallet account={account} />       
+      <ConnectWallet connect={() => connect()} isOpen={isOpen} customBalance={customBalance} />
+      <Transaction account={account} />       
     </>
   )
 }

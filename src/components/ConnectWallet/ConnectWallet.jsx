@@ -1,4 +1,8 @@
 import PropTypes from "prop-types";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 import {
   EthereumClient,
   w3mConnectors,
@@ -20,22 +24,32 @@ const wagmiConfig = createConfig({
 
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
 
-const NavBar = ({ connect, customBalance, isOpen }) => {
+const ConnectWallet = ({ connect, customBalance, isOpen }) => {
   return (
     <div>
-      <WagmiConfig config={wagmiConfig}>
-        <Web3Button onClick={connect} />
-        <h3>Balance: {isOpen && <span> {customBalance} </span>}</h3>
+       <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            News
+          </Typography>
+            <WagmiConfig config={wagmiConfig}>
+               <h3>Balance: {isOpen && <span> {customBalance} </span>}</h3>
+        <Web3Button onClick={connect} />      
       </WagmiConfig>
       <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+        </Toolbar>
+      </AppBar>
+    </Box>
+      
     </div>
   );
 };
 
-NavBar.propTypes = {
+ConnectWallet.propTypes = {
   connect: PropTypes.func,
   customBalance: PropTypes.string,
   isOpen: PropTypes.bool,
 };
 
-export default NavBar;
+export default ConnectWallet;
