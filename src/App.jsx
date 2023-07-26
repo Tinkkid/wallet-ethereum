@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 
 import { useState } from "react";
 import ConnectWallet from './components/ConnectWallet/ConnectWallet';
+import Footer from "./components/Footer";
 import Transaction from "./components/Transaction/Transaction";
 
 
@@ -43,11 +44,16 @@ function App() {
 
 
   return (
-    <>
-      <ConnectWallet connect={() => connect()} isOpen={isOpen} customBalance={customBalance} />
-      <Transaction account={account} />       
-    </>
-  )
+    <div style={{ minHeight: "100vh", display:"flex", flexDirection:"column", justifyContent:'space-between' }}>
+      <ConnectWallet
+        connect={() => connect()}
+        isOpen={isOpen}
+        customBalance={customBalance}
+      />
+      <Transaction account={account} />
+      <Footer />
+    </div>
+  );
 }
 
 export default App

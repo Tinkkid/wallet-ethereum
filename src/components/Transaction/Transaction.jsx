@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
 import { Formik, Form, Field } from "formik";
+import Button from "@mui/material/Button";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 import { ethers } from "ethers";
 
 const Transaction = ({ account }) => {
@@ -31,22 +34,37 @@ const Transaction = ({ account }) => {
   };
 
   return (
-    <>
+    <Box
+      sx={{
+        mt: 5,
+        p: 2,
+        display:"flex",
+        justifyContent:"center",
+      }}
+    >
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Form>
-          <label htmlFor="address">Adress</label>
-          <Field
-            id="address"
-            type="text"
-            name="address"
-            placeholder="Address to"
-          />
-          <label htmlFor="amount">Amount</label>
-          <Field id="amount" type="text" name="amount" placeholder="0.005" />
-          <button type="submit">Submit</button>
-        </Form>
+        <Box
+          component="form"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            width: {
+              mobile: 300,
+              tablet: 700,
+              desktop: 900
+            }
+          }}
+        >
+          <TextField type="text" label="Recipient account" name="address" />
+
+          <TextField type="text" label="Amount in ETH" name="amount" />
+          <Button color="primary" variant="contained" fullWidth type="submit">
+            Submit
+          </Button>
+        </Box>
       </Formik>
-    </>
+    </Box>
   );
 };
 

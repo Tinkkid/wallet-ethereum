@@ -31,13 +31,18 @@ const ConnectWallet = ({ connect, customBalance, isOpen }) => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            Some Logo
           </Typography>
             <WagmiConfig config={wagmiConfig}>
                <h3>Balance: {isOpen && <span> {customBalance} </span>}</h3>
         <Web3Button onClick={connect} />      
       </WagmiConfig>
-      <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+            <Web3Modal projectId={projectId} ethereumClient={ethereumClient}
+              themeVariables={{
+                '--w3m-accent-color': '#e9ce1e',
+                '--w3m-accent-fill-color': '#000'
+  }}
+/>
         </Toolbar>
       </AppBar>
     </Box>
