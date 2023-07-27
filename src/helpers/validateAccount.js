@@ -1,19 +1,17 @@
-export const validateAccount = (value) => {
-   let error;
-   if (!value) {
-     error = 'Required';
-   } else if (!/^0x[0-9,a-f,A-F]{40}$/.test(value)) {
-     error = 'Invalid format of account';
+export const validate = (values) => {
+   const errors = {};
+   if (!values.address) {
+     errors.address = 'Required';
+   } else if (!/^0x[0-9,a-f,A-F]{40}$/.test(values.address)) {
+     errors.address = 'Invalid format of account';
    }
-   return error;
+  
+   if (!values.amount) {
+     errors.amount = 'Required';
+   } else if (!/[0-9]$/.test(values.amount)) {
+     errors.amount = 'Invalid format of amount';
+   }
+  
+   return errors;
 }
 
-export const validateAmount = (value) => {
-  let error;
-  if (!value) {
-    error = "Required";
-  } else if (!/[0-9]$/.test(value)) {
-    error = "Invalid format of amount. Must be numbers";
-  }
-  return error;
-};

@@ -1,11 +1,19 @@
 import styled from '@emotion/styled'
-import { Field, ErrorMessage } from 'formik';
+import { ReactComponent as Loader } from '../../assets/loader.svg'
 
-export const InputWrap = styled.div`
-
+export const Form = styled.form`
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 20px;
 `
 
-export const FormField = styled(Field)`
+export const InputContainer = styled.div`
+width: 100%;
+`
+
+export const FormField = styled.input`
   font-size: 30px;
   padding: 10px;
   width: 100%;
@@ -23,7 +31,7 @@ export const FormField = styled(Field)`
   }
 `;
 
-export const ErrorText = styled(ErrorMessage)`
+export const ErrorText = styled.p`
 font-size: 18px;
 color: #b20000;
 text-align: center;
@@ -33,4 +41,20 @@ export const Label = styled.label`
 color:  #275EFE;
 font-size: 24px;
 `
+
+export const Spinner = styled(Loader)`
+  animation-name: spin;
+  animation-duration: 500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+  @keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+`;
 

@@ -7,7 +7,6 @@ import Transaction from "./components/Transaction/Transaction";
 
 function App() {
  const [userBalance, setUserBalance] = useState(" ");
- const [error, setError] = useState(null);
  const [account, setAccount] = useState(null);
  const [isOpen, setIsOpen] = useState(false);
 
@@ -18,9 +17,7 @@ function App() {
             .then((result) => {
               accountChanged([result[0]]);             
             }).then(setIsOpen(true))
-        } else {
-          setError("You nave not MetaMask. Please install it");
-        }
+        } 
   }
    const accountChanged = (accountName) => {
       setAccount(accountName)
@@ -56,23 +53,3 @@ function App() {
 
 export default App
 
-
-// import './App.css'
-// import FormWallet from './components/FormWallet/FormWallet'
-// import NavBar from './components/NavBar/NavBar'
-
-
-
-// function App() {
-
-
-
-//   return (
-//     <>
-//       <NavBar/>
-//     <FormWallet/>       
-//     </>
-//   )
-// }
-
-// export default App

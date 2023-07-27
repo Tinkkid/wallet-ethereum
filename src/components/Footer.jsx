@@ -2,6 +2,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const Footer = () => {
   return (
@@ -17,18 +19,19 @@ const Footer = () => {
         flexDirection: "column",
       }}
     >
-      <Container maxWidth="sm">
-        <Typography variant="body1">
-          My sticky footer can be found here.
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {"Copyright © "}
-          <Link color="inherit" href="https://mui.com/">
-            Yuliia Kostovynska GitHub
+      <Container maxWidth="sm">   
+        <Typography variant="body2" color="text.primary" sx={{mb:1}}>
+          Yuliia Kostovynska {new Date().getFullYear()} 
+           </Typography>
+           <Link color="inherit" target="_blank" rel="noreferrer" href="https://github.com/Tinkkid/wallet-ethereum">
+               <GitHubIcon/> 
           </Link>{" "}
-          {new Date().getFullYear()}
+           <Link color="inherit" target="_blank" rel="noreferrer"  href="https://www.linkedin.com/in/yuliia-kostovynska/">
+               <LinkedInIcon/>
+          </Link>{" "}
+         
           {"."}
-        </Typography>
+       
       </Container>
     </Box>
   );
