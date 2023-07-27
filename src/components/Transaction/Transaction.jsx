@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
-import { Formik, Form, Field } from "formik";
+import { Formik } from "formik";
 import Button from "@mui/material/Button";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import Box from "@mui/material/Box";
 import { ethers } from "ethers";
+import { validateAccount, validateAmount } from "../../helpers/validateAccount";
+import { ErrorText, FormField, InputWrap, Label } from "./Transaction.styled";
 
 const Transaction = ({ account }) => {
   const initialValues = {
@@ -29,7 +30,6 @@ const Transaction = ({ account }) => {
       })
       .catch((error) => console.log(error));
 
-    console.log(values);
     resetForm();
   };
 
@@ -38,31 +38,56 @@ const Transaction = ({ account }) => {
       sx={{
         mt: 5,
         p: 2,
-        display:"flex",
-        justifyContent:"center",
+        display: "flex",
+        justifyContent: "center",
       }}
     >
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <Box
-          component="form"
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-            width: {
-              mobile: 300,
-              tablet: 700,
-              desktop: 900
-            }
-          }}
-        >
-          <TextField type="text" label="Recipient account" name="address" />
+        {({ isValid, dirty }) => (
+          <Box
+            component="form"
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 6,
+              width: {
+                mobile: 300,
+                tablet: 700,
+                desktop: 900,
+              },
+            }}
+          >
+            <InputWrap>
+              <Label>Recipient account</Label>
+              <FormField
+                type="text"
+                label="Recipient account"
+                name="address"
+                validate={validateAccount}
+              />
+              <ErrorText name="address" component="div" />
+            </InputWrap>
+            <InputWrap>
+              <Label>Amount in ETH</Label>
+              <FormField
+                type="text"
+                label="Amount in ETH"
+                name="amount"
+                validate={validateAmount}
+              />
+              <ErrorText name="amount" component="div" />
+            </InputWrap>
 
-          <TextField type="text" label="Amount in ETH" name="amount" />
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            Submit
-          </Button>
-        </Box>
+            <Button
+              color="primary"
+              variant="contained"
+              type="submit"
+              disabled={!(isValid && dirty)}
+            >
+              Submit
+            </Button>
+          </Box>
+        )}
       </Formik>
     </Box>
   );
@@ -73,3 +98,5 @@ Transaction.propTypes = {
 };
 
 export default Transaction;
+
+// 0x0890412e7dF4FC959F13e5A8D33EaEaf830d91d4

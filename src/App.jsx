@@ -1,6 +1,4 @@
-
 import { ethers } from "ethers";
-
 import { useState } from "react";
 import ConnectWallet from './components/ConnectWallet/ConnectWallet';
 import Footer from "./components/Footer";

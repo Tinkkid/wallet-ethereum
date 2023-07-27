@@ -8,9 +8,10 @@ import {
   w3mConnectors,
   w3mProvider,
 } from "@web3modal/ethereum";
-import { Web3Button, Web3Modal } from "@web3modal/react";
+import { useWeb3Modal, Web3Button, Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { arbitrum, mainnet, sepolia } from "wagmi/chains";
+import { BalanceAmount, BalanceContainer } from "./ConnectWallet.styled";
 
 const chains = [arbitrum, mainnet, sepolia];
 const projectId = import.meta.env.VITE_APP_PROJECT_KEY;
@@ -24,29 +25,41 @@ const wagmiConfig = createConfig({
 
 const ethereumClient = new EthereumClient(wagmiConfig, chains);
 
-const ConnectWallet = ({ connect, customBalance, isOpen }) => {
+const ConnectWallet = ({ connect, customBalance }) => {
+  const { isOpen, open, close } = useWeb3Modal()
   return (
     <div>
-       <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Some Logo
-          </Typography>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar sx={{pr: 5, pl:5}}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Some Logo
+            </Typography>
             <WagmiConfig config={wagmiConfig}>
-               <h3>Balance: {isOpen && <span> {customBalance} </span>}</h3>
-        <Web3Button onClick={connect} />      
-      </WagmiConfig>
-            <Web3Modal projectId={projectId} ethereumClient={ethereumClient}
+              <BalanceContainer>
+                <Typography variant="h6" sx={{ mr: 2 }}>
+                  Balance:
+                </Typography>
+                <BalanceAmount>
+                  {isOpen && open &&  (
+                    <Typography variant="h6">{customBalance}</Typography>
+                  )}
+                </BalanceAmount>
+              </BalanceContainer>
+              <Web3Button onClick={connect}/>
+            </WagmiConfig>
+            <Web3Modal
+              projectId={projectId}
+              ethereumClient={ethereumClient}
               themeVariables={{
-                '--w3m-accent-color': '#e9ce1e',
-                '--w3m-accent-fill-color': '#000'
-  }}
-/>
-        </Toolbar>
-      </AppBar>
-    </Box>
-      
+                "--w3m-accent-color": "#e9ce1e",
+                "--w3m-accent-fill-color": "#000",
+                "--w3m-text-medium-regular-size": "24px"
+              }}
+            />
+          </Toolbar>
+        </AppBar>
+      </Box>
     </div>
   );
 };

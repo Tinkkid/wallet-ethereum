@@ -5,7 +5,7 @@
   font-size: 24px;
 }
 
-body {
+body, p, h1 {
   margin: 0;
 }
 
