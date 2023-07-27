@@ -10,10 +10,11 @@ import {
 } from "@web3modal/ethereum";
 import { useWeb3Modal, Web3Button, Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { arbitrum, mainnet, sepolia } from "wagmi/chains";
+import { arbitrum, mainnet, sepolia, goerli } from "wagmi/chains";
 import { BalanceAmount, BalanceContainer } from "./ConnectWallet.styled";
+import { ReactComponent as Ethereum } from '../../assets/ethereum.svg'
 
-const chains = [arbitrum, mainnet, sepolia];
+const chains = [arbitrum, mainnet, sepolia, goerli];
 const projectId = import.meta.env.VITE_APP_PROJECT_KEY;
 
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
@@ -34,9 +35,8 @@ const ConnectWallet = ({ connect, customBalance }) => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar sx={{ pr: 5, pl: 5 }}>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Some Logo
-            </Typography>
+            <Typography component="div" sx={{ flexGrow: 1 }}> <Ethereum style={{width:"100px", height:"100px"}} /></Typography>
+           
             
               <WagmiConfig config={wagmiConfig}>
                 <BalanceContainer>

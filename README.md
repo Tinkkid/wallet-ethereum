@@ -1,8 +1,38 @@
-# React + Vite
+# My wallet ethereum
+SPA application for connecting and checking the wallet, and making transactions from your account to any other.
+To connect the wallet, you need to have the [Metamask](https://chrome.google.com/webstore/detail/metamask/) Chrome extension installed. 
+You can connect via desktop or mobile application with QR code. When you connect the wallet, you will see your current balance. Using the form, you can enter the address of any wallet, enter the amount and make a transaction. Then confirm or cancel the transfer in the Metamask app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+<span>
+<img src="./public/ScreenWallet.png" width="400" title="screen">
+</span>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Project built using:
+- [Web3Modal](https://docs.walletconnect.com/2.0/web3modal/about)
+
+
+## Getting Started
+1. Clone this repository:
+
+```bash
+git clone https://github.com/Tinkkid/wallet-ethereum
+```
+
+2. Install all dependencies:
+
+```bash
+npm install
+```
+3. Setup the necessary environment variables in the .env file. You need use variables for projectID from (WalletConnect)[https://cloud.walletconnect.com/sign-in]
+
+4. Start project: write command
+
+```bash
+npm run dev
+```
+
+7. Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
+
+## Live page
+Open page - use link [Wallet-Ethereum](https://wallet-ethereum.vercel.app/)
