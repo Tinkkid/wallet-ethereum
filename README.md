@@ -10,7 +10,11 @@ You can connect via desktop or mobile application with QR code. When you connect
 
 ### Project built using:
 - [Web3Modal](https://docs.walletconnect.com/2.0/web3modal/about)
-
+- [React]()
+- [Material UI](https://mui.com/material-ui/getting-started/installation/)
+- [ReactFormik](https://formik.org/)
+- [Ethers](https://docs.ethers.org/v6/)
+- [MetaMask](https://docs.metamask.io/)
 
 ## Getting Started
 1. Clone this repository:
@@ -24,7 +28,7 @@ git clone https://github.com/Tinkkid/wallet-ethereum
 ```bash
 npm install
 ```
-3. Setup the necessary environment variables in the .env file. You need use variables for projectID from (WalletConnect)[https://cloud.walletconnect.com/sign-in]
+3. Setup the necessary environment variables in the .env file. You need use variables for projectID from [WalletConnect](https://cloud.walletconnect.com/sign-in)
 
 4. Start project: write command
 
