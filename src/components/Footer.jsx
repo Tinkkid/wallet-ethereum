@@ -10,8 +10,7 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        py: 3,
-        px: 2,
+        p: {mobile:1, desktop:2},
         mt: "auto",
         backgroundColor: "#e9ce1e",
         textAlign: "center",
@@ -20,7 +19,11 @@ const Footer = () => {
       }}
     >
       <Container maxWidth="sm">   
-        <Typography variant="body2" color="text.primary" sx={{mb:1}}>
+        <Typography variant="body2" color="text.primary" sx={{mb:1,  fontSize: {
+                      mobile: "16px",
+                      tablet: "18px",
+                      desktop: "24px",
+                    }}}>
           Yuliia Kostovynska {new Date().getFullYear()} 
            </Typography>
            <Link color="inherit" target="_blank" rel="noreferrer" href="https://github.com/Tinkkid/wallet-ethereum">

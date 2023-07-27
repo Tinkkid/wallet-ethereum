@@ -97,12 +97,21 @@ const Transaction = ({ account }) => {
           variant="contained"
           sx={{
             width: {
-              mobile: 50,
-              tablet: 70,
+              mobile: 100,
+              tablet: 120,
               desktop: 160,
             },
-            p: 2,
+            pt: 2,
+            pb: 2,
             mt: 3,
+            mb: 4,
+            pl: 3,
+            pr: 3,
+            fontSize: {
+               mobile: "16px",
+              tablet: "20px",
+              desktop: "24px",
+            }
           }}
           type="submit"
           disabled={!(formik.isValid && formik.dirty)}

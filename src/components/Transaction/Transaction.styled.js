@@ -14,7 +14,7 @@ width: 100%;
 `
 
 export const FormField = styled.input`
-  font-size: 30px;
+  font-size: 18px;
   padding: 10px;
   width: 100%;
   border-radius: 6px;
@@ -29,17 +29,41 @@ export const FormField = styled.input`
     outline: none;
     border-color: #275EFE;
   }
+
+ @media screen and (min-width: 768px) {
+font-size: 20px;
+ }
+
+  @media screen and (min-width: 1280px) {
+font-size: 24px;
+  }
 `;
 
 export const ErrorText = styled.p`
-font-size: 18px;
+font-size: 14px;
 color: #b20000;
 text-align: center;
+
+ @media screen and (min-width: 768px) {
+font-size: 16px;
+ }
+
+  @media screen and (min-width: 1280px) {
+font-size: 18px;
+  }
 `
 
 export const Label = styled.label`
 color:  #275EFE;
+font-size: 18px;
+
+ @media screen and (min-width: 768px) {
+font-size: 20px;
+ }
+
+  @media screen and (min-width: 1280px) {
 font-size: 24px;
+  }
 `
 
 export const Spinner = styled(Loader)`

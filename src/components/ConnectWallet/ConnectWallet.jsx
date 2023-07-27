@@ -11,8 +11,7 @@ import {
 import { useWeb3Modal, Web3Button, Web3Modal } from "@web3modal/react";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { arbitrum, mainnet, sepolia, goerli } from "wagmi/chains";
-import { BalanceAmount, BalanceContainer } from "./ConnectWallet.styled";
-import { ReactComponent as Ethereum } from '../../assets/ethereum.svg'
+import { BalanceAmount, BalanceContainer, Icon } from "./ConnectWallet.styled";
 
 const chains = [arbitrum, mainnet, sepolia, goerli];
 const projectId = import.meta.env.VITE_APP_PROJECT_KEY;
@@ -34,26 +33,68 @@ const ConnectWallet = ({ connect, customBalance }) => {
     <div>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
-          <Toolbar sx={{ pr: 5, pl: 5 }}>
-            <Typography component="div" sx={{ flexGrow: 1 }}> <Ethereum style={{width:"100px", height:"100px"}} /></Typography>
-           
-            
-              <WagmiConfig config={wagmiConfig}>
-                <BalanceContainer>
-                  <Typography variant="h6" sx={{ mr: 2 }}>
-                    Balance:
-                  </Typography>
-                  <BalanceAmount>
-                    {open ? (
-                      <Typography variant="h6">{customBalance}</Typography>
-                    ) : (
-                      <Typography variant="h6">0.000</Typography>
-                    )}
-                  </BalanceAmount>
-                </BalanceContainer>
-                <Web3Button onClick={connect} customBalance={customBalance} />
-              </WagmiConfig>
-          
+          <Toolbar
+            sx={{
+              pr: { mobile: 1, tablet: 3, desktop: 5 },
+              pl: { mobile: 1, tablet: 3, desktop: 5 },
+            }}
+          >
+            <Typography component="div" sx={{ flexGrow: 1 }}>
+              {" "}
+              <Icon />
+            </Typography>
+
+            <WagmiConfig config={wagmiConfig}>
+              <BalanceContainer>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    mr: {
+                      mobile: "5px",
+                      tablet: "8px",
+                      desktop: "10px"
+                    },
+                    fontSize: {
+                      mobile: "16px",
+                      tablet: "18px",
+                      desktop: "24px",
+                    },
+                  }}
+                >
+                  Balance
+                </Typography>
+                <BalanceAmount>
+                  {open ? (
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontSize: {
+                          mobile: "16px",
+                          tablet: "18px",
+                          desktop: "24px",
+                        },
+                      }}
+                    >
+                      {customBalance}
+                    </Typography>
+                  ) : (
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontSize: {
+                          mobile: "16px",
+                          tablet: "18px",
+                          desktop: "24px",
+                        },
+                      }}
+                    >
+                      0.000
+                    </Typography>
+                  )}
+                </BalanceAmount>
+              </BalanceContainer>
+              <Web3Button onClick={connect} customBalance={customBalance} />
+            </WagmiConfig>
 
             <Web3Modal
               projectId={projectId}
@@ -61,7 +102,7 @@ const ConnectWallet = ({ connect, customBalance }) => {
               themeVariables={{
                 "--w3m-accent-color": "#e9ce1e",
                 "--w3m-accent-fill-color": "#000",
-                "--w3m-text-medium-regular-size": "24px",
+                
               }}
             />
           </Toolbar>
